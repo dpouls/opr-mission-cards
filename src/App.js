@@ -78,14 +78,14 @@ function App() {
     // let arr = threeCards.filter((c) => c.number !== number);
     let arr = [...threeCards]
     let index = threeCards.findIndex(c => c.number === number)
-    console.log(index)
+    
     // setDiscards([...discards, number]);
     discards = [...discards, number];
     
     let randomCard = getRandomCard(arr);
     if (randomCard) {
       arr.splice(index,1,randomCard) 
-      console.log('arr', arr)
+     
     } else {
       // arr = [...arr, randomCard];
       arr.splice(index,1) 
