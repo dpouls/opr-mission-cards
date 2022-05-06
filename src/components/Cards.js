@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import  Card  from "./Card";
 
-function Cards({cards, game}) {
+function Cards({cards, game, changeVP, discard}) {
     
   return (
     <Container>
@@ -16,7 +16,7 @@ function Cards({cards, game}) {
         {cards.map((card) => {
           return (
             <Col key={card.number} xs="12" md="6" lg="4">
-              <Card card={card} />
+              <Card card={card} game={game} changeVP={changeVP} discard={discard}/>
             </Col>
           );
         })}

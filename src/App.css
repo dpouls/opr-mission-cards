@@ -1,18 +1,165 @@
-@import 'bootstrap/dist/css/bootstrap.min.css';
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700;800;900&family=Orbitron:wght@400;900&display=swap");
 
+.app {
+  /* background-color: rgb(220, 235, 245); */
+  min-height: 100vh;
+}
+
+.aof-background {
+  /* background-color: rgb(34, 75, 1); */
+  background: rgb(198, 241, 255);
+  background: linear-gradient(180deg,
+    rgba(198, 241, 255, 1) 4%,
+    rgb(237, 254, 255)60%,
+    rgb(83, 126, 26) 100%
+  );
+  font-family: "Cinzel Decorative", cursive;
+  font-size: 1.1em;
+  font-weight: 700;
+}
+
+.gdf-background {
+  color: white;
+  font-family: "Orbitron", sans-serif;
+  background-color: black;
+  background-image: radial-gradient(
+      white,
+      rgba(255, 255, 255, 0.123) 2px,
+      transparent 40px
+    ),
+    radial-gradient(white, rgba(255, 255, 255, 0.171) 1px, transparent 30px),
+    radial-gradient(white, rgba(255, 255, 255, 0.1) 2px, transparent 40px),
+    radial-gradient(
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.068) 2px,
+      transparent 30px
+    );
+  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+  font-size: 1.1em;
+
+}
 .mission-card {
-  min-height: 300px;
+  min-height: 400px;
 }
 .title {
   font-weight: 900;
 }
 .number {
   font-weight: 900;
+  font-size: 1.2em;
 }
 .mission-desc {
- font-style: italic;
+  /* font-style: italic; */
 }
 .mission-vp {
   font-weight: 800;
+  color: purple;
+  font-size: x-large;
 }
 
+
+.hover-blue:hover {
+  color: blue;
+}
+.hover-red:hover {
+  color: red;
+}
+.pointer {
+  cursor: pointer;
+}
+.aof-card {
+  /* border: solid 2px greenyellow; */
+  border-radius: 10px;
+  background-color: #f8f5de;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 210, 0, 0.4),
+    rgba(165, 133, 4, 0.144) 11%,
+    rgba(0, 0, 0, 0) 35%,
+    rgba(200, 160, 0, 0.1) 65%
+  );
+  box-shadow: inset 0 0 75px rgba(88, 72, 1, 0.3),
+    inset 0 0 20px rgba(85, 69, 0, 0.4), inset 0 0 30px rgba(65, 36, 1, 0.753);
+  color: rgba(0, 0, 0, 1);
+
+  font-weight: 900;
+  /* width: calc(8.5in - 15em); */
+  /* letter-spacing: 0.05em; */
+  /* line-height: 1.8; */
+  /* padding: 5em 10em 15em 5em; */
+}
+
+.aof-vp-button {
+  font-weight: 900;
+  font-size: 40pt;
+  color: rgb(0, 0, 0);
+}
+.gdf-vp-button {
+  font-weight: 900;
+  font-size: 40pt;
+  color: white;
+}
+
+.gdf-card {
+  background: linear-gradient(-135deg, transparent 25px, #111314 0);
+
+  font-weight: 900;
+  border: none;
+  padding: 20px;
+  border-radius: 0.5rem;
+  filter: drop-shadow(2px 2px 10px rgb(156, 156, 156));
+  /* border: solid 1px white; */
+  max-width: 550px;
+  /* margin: 110px auto 0; */
+  color: rgb(1, 255, 1) !important;
+}
+.gdf-text-gradient {
+  background: rgb(0, 241, 255);
+  background: linear-gradient(
+    52deg,
+    rgba(0, 241, 255, 1) 4%,
+    rgb(143, 95, 255) 52%,
+    rgba(254, 0, 248, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gdf-claim {
+  color: rgb(57, 233, 204);
+}
+.aof-claim {
+  color: rgb(10, 124, 57);
+}
+.gdf-discard {
+  color: rgba(255, 0, 0, 0.774);
+}
+.gdf-claim:hover {
+  color: white;
+}
+.aof-claim:hover {
+  color: rgb(25, 0, 255);
+}
+.gdf-discard:hover {
+  color: white;
+}
+.gdf-button {
+  background: rgb(0, 241, 255);
+  background: linear-gradient(
+    52deg,
+    rgb(143, 95, 255) 52%,
+    rgba(254, 0, 250, 0.712) 100%
+  );
+}
+.aof-button {
+  background: rgba(88, 70, 65, 0.945);
+}
+
+#aof-vp-button-add {
+  color: rgb(27, 126, 2);
+}
+#aof-vp-button-subtract {
+  color: rgb(126, 21, 2);
+}

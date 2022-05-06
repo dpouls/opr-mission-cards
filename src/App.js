@@ -7,88 +7,176 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import Cards from "./components/Cards";
-import { aofCards } from "./Cards";
+import { aofCards, gdfCards } from "./Cards";
+let discards = [0];
 function App() {
   const games = [
     { id: "gdf", name: "Grimdark Future" },
     { id: "aof", name: "Age of Fantasy" },
   ];
-  const [game, setGame] = useState("aof");
+  const [game, setGame] = useState("gdf");
   const [showAllCards, setShowAllCards] = useState(false);
   const [cards, setCards] = useState([]);
-  const [threeCards, setThreeCards] = useState([])
+  const [threeCards, setThreeCards] = useState([]);
+  const [showThree, setShowThree] = useState(false);
+  const [cardArray, setCardArray] = useState(gdfCards);
+  // const [discards, setDiscards] = useState([0]);
+  const [vp, setVP] = useState(0);
   useEffect(() => {
-    // console.log("check");
+    setShowThree(false);
+    setThreeCards([]);
     let selectedGame = games.find((g) => g.id === game);
-    if (selectedGame.id === "aof" && showAllCards ) {
+    if (selectedGame.id === "aof") {
       setCards(aofCards);
+      setCardArray(aofCards);
     } else {
-      setCards([]);
+      setCards(gdfCards);
+      setCardArray(gdfCards);
     }
-  }, [game, showAllCards]);
+    setShowAllCards(true);
+  }, [game]);
+
+  const getRandomCard = (tempCards) => {
+    let allowedCards = cardArray.filter(
+      (c) => !discards.includes(c.number) && !tempCards.includes(c)
+    );
+    if (allowedCards.length > 0) {
+      let randomIndex = Math.floor(Math.random() * allowedCards.length);
+      let randomCard = allowedCards[randomIndex];
+      return randomCard;
+    } else {
+      return false;
+    }
+  };
+
   const drawThree = () => {
-  
-    let tempCards = []
-    // if(game === 'aof'){
-      let arr = [...aofCards]
-      const getRandomCard = () => {
-        console.log('randomCard()')
+    discards = [0]
+    setShowAllCards(false);
 
-        let randomIndex = Math.floor(Math.random() * arr.length)
-        tempCards = [...tempCards, arr[randomIndex]]
-        arr = arr.filter(a => a.number !== arr[randomIndex].number)
-        // let check = tempCards.find(tc => tc.number === aofCards[randomIndex].number)
-        // // console.log('check', check)
-        // // console.log('test', [...new Set(aofCards)])
-        // if(!check?.number){
-        //   // console.log('true', aofCards[randomIndex])
-        //   console.log('returning', aofCards[randomIndex])
-        //   return aofCards[randomIndex]
-        // } else {
-        //   console.log('else', tempCards, aofCards[randomIndex])
-        //   getRandomCard()
-          
-        //   // return false
-        // }
-        // console.log('random card', randomIndex)
+    let tempCards = [];
+    for (let i = 0; i < 3; i++) {
+      let randomCard = getRandomCard(tempCards);
+      if (randomCard) {
+        tempCards = [...tempCards, randomCard];
+      
+      } else {
+        return;
       }
-
-    // }
-    for(let i = 0; i < 3; i++){
-       getRandomCard()
-      // if(card){
-
-      //   tempCards = [...tempCards, card]
-      // }
     }
-    console.log(tempCards)
-    setThreeCards(tempCards)
-  }
+    setThreeCards(tempCards);
+    setShowThree(true);
+  };
+  const changeVP = (amount) => {
+    amount = parseInt(amount);
+    let newAmount = vp + amount;
+    if (newAmount < 0) {
+      newAmount = 0;
+    }
+    setVP(newAmount);
+  };
+  const discard = (number) => {
+    let arr = threeCards.filter((c) => c.number !== number);
+    // setDiscards([...discards, number]);
+    discards = [...discards, number];
+
+    let randomCard = getRandomCard(arr);
+    if (randomCard) {
+      arr = [...arr, randomCard];
+    }
+    setThreeCards(arr);
+  };
   return (
-    <Container>
-      <Button className="m-2" onClick={() => setShowAllCards(!showAllCards)}>
-        {showAllCards ? "Hide all cards" : "Show all Cards"}
-      </Button>
-      <Button onClick={() => drawThree()}>Draw Three</Button>
-      <Form.Select
-        value={game}
-        onChange={(e) => {
-          setGame(e.target.value);
-        }}
-      >
-        {games.map((g) => {
-          return (
-            <option key={g.id} value={g.id}>
-              {g.name}
-            </option>
-          );
-        })}
-      </Form.Select>
-        {threeCards.length > 0 && (
-          <Cards cards={threeCards} />
+    <div className={`${game}-background`}>
+      <Container className="app">
+        <h1 className="text-center p-2 ">OnePageRules Mission Cards</h1>
+        <h4 className="text-center p-2">
+          Select a game and click the <em>Draw Three</em> button for a fresh
+          deck.
+        </h4>
+        <Row className="pt-4">
+          <Col xs="12" md="6" lg="4" xl="3">
+            <Form.Select
+              value={game}
+              onChange={(e) => {
+                setGame(e.target.value);
+              }}
+            >
+              {games.map((g) => {
+                return (
+                  <option key={g.id} value={g.id}>
+                    {g.name}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Col>
+        </Row>
+        <Row className="">
+          <Col xs="12" md="6">
+            <Button
+              className={`my-2 ${game}-button`}
+              onClick={() => {
+                setShowThree(false);
+                setShowAllCards(!showAllCards);
+              }}
+            >
+              {showAllCards ? "HIDE ALL CARDS" : "SHOW ALL CARDS"}
+            </Button>
+            <Button
+              className={`m-2 ${game}-button`}
+              onClick={() => drawThree()}
+            >
+              Draw Three
+            </Button>
+          </Col>
+          <Col className={`${game}-text-gradient`} xs="12" md="6">
+            <b
+              id={game + "-vp-button-add"}
+              className={` ${game}-vp-button vp-button   mx-3 pointer`}
+              onClick={() => changeVP(1)}
+            >
+              +
+            </b>
+            <b className={`${game}-vp-button`}>{vp} VP</b>
+            <b
+              id={game + "-vp-button-subtract"}
+              className={` ${game}-vp-button  vp-button mx-3 pointer`}
+              onClick={() => changeVP(-1)}
+            >
+              -
+            </b>
+            <span onClick={() => setVP(0)} className="pointer hover-red">
+              Reset
+            </span>
+          
+          </Col>
+        </Row>
+        {discards.length > 1 && showThree && (
+          discards.length > 33 ? (
+            <span>{discards.length - 1} discards. 0 remain in the deck.</span>
+          ) : (
+
+            <span>
+                {discards.length - 1} discards. {34 - discards.length }{" "}
+                remain in the deck.
+              </span>
+                )
+            )}
+
+        {showThree && threeCards.length > 0 ? (
+          <Cards
+            changeVP={changeVP}
+            cards={threeCards}
+            game={game}
+            discard={discard}
+          />
+        ) : (
+          showThree &&
+          "You ran out of cards. Click 'Draw Three' to start fresh."
         )}
-      <Cards cards={cards} />
-    </Container>
+        {showAllCards && <Cards game={game} cards={cards} />}
+      </Container>
+    </div>
   );
 }
 
