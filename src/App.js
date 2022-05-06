@@ -84,9 +84,12 @@ function App() {
     
     let randomCard = getRandomCard(arr);
     if (randomCard) {
-      // arr = [...arr, randomCard];
       arr.splice(index,1,randomCard) 
       console.log('arr', arr)
+    } else {
+      // arr = [...arr, randomCard];
+      arr.splice(index,1) 
+
     }
     setThreeCards(arr);
   };
