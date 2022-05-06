@@ -14,7 +14,7 @@ function Card({ card, changeVP, discard ,game}) {
   };
   return (
     <Container className={` mission-card ${game}-card  my-3 p-3 d-flex flex-column justify-content-between`}>
-      <Row className={`${game}-text-gradient d-flex justify-content-between`}>
+      <Row className={`d-flex justify-content-between`}>
         <Col className="number " xs="5" md="4">
         
           <span className="number">{number}</span>

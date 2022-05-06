@@ -75,13 +75,18 @@ function App() {
     setVP(newAmount);
   };
   const discard = (number) => {
-    let arr = threeCards.filter((c) => c.number !== number);
+    // let arr = threeCards.filter((c) => c.number !== number);
+    let arr = [...threeCards]
+    let index = threeCards.findIndex(c => c.number === number)
+    console.log(index)
     // setDiscards([...discards, number]);
     discards = [...discards, number];
-
+    
     let randomCard = getRandomCard(arr);
     if (randomCard) {
-      arr = [...arr, randomCard];
+      // arr = [...arr, randomCard];
+      arr.splice(index,1,randomCard) 
+      console.log('arr', arr)
     }
     setThreeCards(arr);
   };
