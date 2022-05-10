@@ -138,9 +138,12 @@
 }
 .gdf-claim:hover {
   color: white;
+  cursor: pointer;
+
 }
 .aof-claim:hover {
   color: rgb(25, 0, 255);
+  cursor: pointer;
 }
 .gdf-discard:hover {
   color: white;
@@ -163,3 +166,22 @@
 #aof-vp-button-subtract {
   color: rgb(126, 21, 2);
 }
+.aof-claimed-mission {
+  border-radius: 10px;
+  /* background-color: white; */
+}
+.aof-claimed-mission {
+  border-radius: 10px;
+  background-color: rgba(191, 223, 217, 0.479);
+}
+.aof-claimed-mission:hover {
+  border-radius: 10px;
+  background-color: rgba(191, 223, 217, 1);
+}
+.gdf-claimed-mission {
+  background-color: rgba(196, 133, 255, 0.603);
+}
+.gdf-claimed-mission:hover {
+  background-color: rgba(196, 133, 255, 1);
+}
+

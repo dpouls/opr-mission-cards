@@ -8,7 +8,9 @@ import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import Cards from "./components/Cards";
 import { aofCards, gdfCards } from "./Cards";
+import ClaimedMission from "./components/ClaimedMission";
 let discards = [0];
+
 function App() {
   const games = [
     { id: "gdf", name: "Grimdark Future" },
@@ -20,11 +22,14 @@ function App() {
   const [threeCards, setThreeCards] = useState([]);
   const [showThree, setShowThree] = useState(false);
   const [cardArray, setCardArray] = useState(gdfCards);
+  const [claimedMissions, setClaimedMissions] = useState([]);
   // const [discards, setDiscards] = useState([0]);
   const [vp, setVP] = useState(0);
   useEffect(() => {
     setShowThree(false);
     setThreeCards([]);
+    setClaimedMissions([]);
+    setVP(0);
     let selectedGame = games.find((g) => g.id === game);
     if (selectedGame.id === "aof") {
       setCards(aofCards);
@@ -50,7 +55,7 @@ function App() {
   };
 
   const drawThree = () => {
-    discards = [0]
+    discards = [0];
     setShowAllCards(false);
 
     let tempCards = [];
@@ -58,7 +63,6 @@ function App() {
       let randomCard = getRandomCard(tempCards);
       if (randomCard) {
         tempCards = [...tempCards, randomCard];
-      
       } else {
         return;
       }
@@ -76,22 +80,29 @@ function App() {
   };
   const discard = (number) => {
     // let arr = threeCards.filter((c) => c.number !== number);
-    let arr = [...threeCards]
-    let index = threeCards.findIndex(c => c.number === number)
-    
+    let arr = [...threeCards];
+    let index = threeCards.findIndex((c) => c.number === number);
+
     // setDiscards([...discards, number]);
     discards = [...discards, number];
-    
+
     let randomCard = getRandomCard(arr);
     if (randomCard) {
-      arr.splice(index,1,randomCard) 
-     
+      arr.splice(index, 1, randomCard);
     } else {
       // arr = [...arr, randomCard];
-      arr.splice(index,1) 
-
+      arr.splice(index, 1);
     }
     setThreeCards(arr);
+  };
+  const unClaim = (mission) => {
+    let newArr = [...claimedMissions];
+
+    newArr = claimedMissions.filter((cm) => cm.desc !== mission.desc);
+
+    setClaimedMissions(newArr);
+    let newVP = vp - mission.vp;
+    setVP(newVP);
   };
   return (
     <div className={`${game}-background`}>
@@ -156,28 +167,53 @@ function App() {
             <span onClick={() => setVP(0)} className="pointer hover-red">
               Reset
             </span>
-          
           </Col>
         </Row>
-        {discards.length > 1 && showThree && (
-          discards.length > 33 ? (
-            <span>{discards.length - 1} discards. 0 remain in the deck.</span>
-          ) : (
-
-            <span>
-                {discards.length - 1} discards. {34 - discards.length }{" "}
-                remain in the deck.
-              </span>
-                )
-            )}
-
+        <Row>
+          <Col>
+            {discards.length > 1 &&
+              showThree &&
+              (discards.length > 33 ? (
+                <span>
+                  {discards.length - 1} discards. 0 remain in the deck.
+                </span>
+              ) : (
+                <span>
+                  {discards.length - 1} discards. {34 - discards.length} remain
+                  in the deck.
+                </span>
+              ))}
+          </Col>
+        </Row>
         {showThree && threeCards.length > 0 ? (
-          <Cards
-            changeVP={changeVP}
-            cards={threeCards}
-            game={game}
-            discard={discard}
-          />
+          <>
+            <Cards
+              changeVP={changeVP}
+              cards={threeCards}
+              game={game}
+              discard={discard}
+              claimedMissions={claimedMissions}
+              setClaimedMissions={setClaimedMissions}
+            />
+            {claimedMissions.length > 0 && (
+              <Container className="bg-light rounded-3 p-3">
+                <h4 className='text-dark'>
+                  <u>Claimed Objectives</u>
+                </h4>
+                {claimedMissions.length > 0 &&
+                  claimedMissions.map((cm,i) => {
+                    return (
+                      <ClaimedMission
+                        key={cm.desc + i}
+                        mission={cm}
+                        unClaim={unClaim}
+                        game={game}
+                      />
+                    );
+                  })}
+              </Container>
+            )}
+          </>
         ) : (
           showThree &&
           "You ran out of cards. Click 'Draw Three' to start fresh."

@@ -4,13 +4,15 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-function Card({ card, changeVP, discard ,game}) {
+function Card({ card, changeVP, discard ,game, claimedMissions,setClaimedMissions}) {
   let { number, title, missions, objectiveMarkers } = card;
 
-  const handleClaim = (vp) => {
+  const handleClaim = (mission, index) => {
     // discard the card
     discard(number);
-    changeVP(vp);
+    changeVP(mission.vp);
+    let arr = [...claimedMissions, mission]
+    setClaimedMissions(arr)
   };
   return (
     <Container className={` mission-card ${game}-card  my-3 p-3 d-flex flex-column justify-content-between`}>
@@ -26,7 +28,7 @@ function Card({ card, changeVP, discard ,game}) {
       <hr />
         </Col>
       </Row>
-      {missions.map((mission) => {
+      {missions.map((mission, index) => {
         return (
           <Row className="mission " key={mission.desc}>
             <Col className={`${game === 'gdf' && 'gdf-text-gradient '}   mission-desc text-center`} xs="12">
@@ -39,7 +41,7 @@ function Card({ card, changeVP, discard ,game}) {
               <Col xs="6" className='d-flex justify-content-end align-items-center'>
                 <span
                   className={`${game}-claim pointer hover-white`}
-                  onClick={() => handleClaim(mission.vp)}
+                  onClick={() => handleClaim(mission, index)}
                 >
                   Claim
                 </span>

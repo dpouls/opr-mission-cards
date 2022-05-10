@@ -5,18 +5,32 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
-import  Card  from "./Card";
+import Card from "./Card";
 
-function Cards({cards, game, changeVP, discard}) {
-    
+function Cards({
+  cards,
+  game,
+  changeVP,
+  discard,
+  claimedMissions,
+  setClaimedMissions,
+  unClaim
+}) {
   return (
     <Container>
-        
       <Row>
         {cards.map((card) => {
           return (
             <Col key={card.number} xs="12" md="6" lg="4">
-              <Card card={card} game={game} changeVP={changeVP} discard={discard}/>
+              <Card
+              unClaim={unClaim}
+                card={card}
+                game={game}
+                changeVP={changeVP}
+                discard={discard}
+                claimedMissions={claimedMissions}
+                setClaimedMissions={setClaimedMissions}
+              />
             </Col>
           );
         })}
