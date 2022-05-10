@@ -5,7 +5,6 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import Badge from "react-bootstrap/Badge";
 import Cards from "./components/Cards";
 import { aofCards, gdfCards } from "./Cards";
 import ClaimedMission from "./components/ClaimedMission";
@@ -57,6 +56,8 @@ function App() {
   const drawThree = () => {
     discards = [0];
     setShowAllCards(false);
+    setVP(0)
+    setClaimedMissions([])
 
     let tempCards = [];
     for (let i = 0; i < 3; i++) {
