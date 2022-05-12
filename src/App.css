@@ -184,4 +184,6 @@
 .gdf-claimed-mission:hover {
   background-color: rgba(196, 133, 255, 1);
 }
-
+main {
+  min-height: 90vh;
+}
