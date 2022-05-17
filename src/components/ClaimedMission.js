@@ -11,8 +11,8 @@ function ClaimedMission({ mission, unClaim, game }) {
       onMouseLeave={() => setShowUnclaim(false)}
     >
       <Col xs="12">{mission.desc}</Col>
-      <Col xs="6" className="text-danger">
-        {mission.vp} VP
+      <Col xs="6" >
+      <b className="text-danger"> {mission.vp} VP</b> <u className='ms-5'>Claimed in Round {mission.round}</u>
       </Col>
       <Col xs="6">
         {showUnclaim && (

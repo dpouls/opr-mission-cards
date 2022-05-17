@@ -4,6 +4,13 @@
 .app {
   /* background-color: rgb(220, 235, 245); */
   min-height: 100vh;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Old versions of Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
 }
 
 .aof-background {
@@ -99,6 +106,16 @@
 .gdf-vp-button {
   font-weight: 900;
   font-size: 40pt;
+  color: white;
+}
+.aof-round-button {
+  font-weight: 900;
+  font-size: 30pt;
+  color: rgb(0, 0, 0);
+}
+.gdf-round-button {
+  font-weight: 900;
+  font-size: 30pt;
   color: white;
 }
 

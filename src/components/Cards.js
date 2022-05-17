@@ -11,7 +11,8 @@ function Cards({
   discard,
   claimedMissions,
   setClaimedMissions,
-  unClaim
+  unClaim,
+  round
 }) {
   return (
     <Container>
@@ -20,9 +21,10 @@ function Cards({
           return (
             <Col key={card.number} xs="12" md="6" lg="4">
               <Card
-              unClaim={unClaim}
+                unClaim={unClaim}
                 card={card}
                 game={game}
+                round={round}
                 changeVP={changeVP}
                 discard={discard}
                 claimedMissions={claimedMissions}

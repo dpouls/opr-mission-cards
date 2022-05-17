@@ -4,13 +4,15 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-function Card({ card, changeVP, discard ,game, claimedMissions,setClaimedMissions}) {
+function Card({ card, changeVP, discard ,game, claimedMissions,setClaimedMissions, round}) {
   let { number, title, missions, objectiveMarkers } = card;
 
   const handleClaim = (mission, index) => {
     // discard the card
     discard(number);
     changeVP(mission.vp);
+    
+    mission.round  = round
     let arr = [...claimedMissions, mission]
     setClaimedMissions(arr)
   };
