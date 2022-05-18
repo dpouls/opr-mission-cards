@@ -3,24 +3,25 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 function ClaimedMission({ mission, unClaim, game }) {
-  const [showUnclaim, setShowUnclaim] = useState(false);
+  const [showUnclaim, setShowUnclaim] = useState(true);
   return (
     <Row
       className={`${game}-claimed-mission my-1 text-dark`}
-      onMouseEnter={() => setShowUnclaim(true)}
-      onMouseLeave={() => setShowUnclaim(false)}
+      // onMouseEnter={() => setShowUnclaim(true)}
+      // onMouseLeave={() => setShowUnclaim(false)}
     >
       <Col xs="12">{mission.desc}</Col>
       <Col xs="6" >
-      <b className="text-danger"> {mission.vp} VP</b> <u className='ms-5'>Claimed in Round {mission.round}</u>
+      <b className="text-danger"> {mission.vp} VP</b> 
       </Col>
       <Col xs="6">
         {showUnclaim && (
-          <span className={`${game}-claim`} onClick={() => unClaim(mission)}>
+          <p className={` pointer unclaim text-end m-0`} onClick={() => unClaim(mission)}>
             Unclaim
-          </span>
+          </p>
         )}
       </Col>
+        <Col xs='12'><u className=''>Claimed in Round {mission.round}</u></Col>
     </Row>
   );
 }

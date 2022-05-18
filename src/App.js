@@ -379,7 +379,7 @@ function App() {
             </a>
             .{" "}
           </h6>
-          <h6>
+          <h6 className='m-0'>
             <span>
               If you like 3D printing, check out my other site{" "}
               <a

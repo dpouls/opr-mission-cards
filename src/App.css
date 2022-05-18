@@ -196,11 +196,18 @@
   background-color: rgba(191, 223, 217, 1);
 }
 .gdf-claimed-mission {
-  background-color: rgba(196, 133, 255, 0.603);
+  background-color: rgba(143, 255, 133, 0.603);
 }
 .gdf-claimed-mission:hover {
   background-color: rgba(196, 133, 255, 1);
 }
 main {
   min-height: 90vh;
+}
+.unclaim {
+   color: red;
+   text-decoration: underline;
+}
+.unclaim:hover {
+  color: blue;
 }
