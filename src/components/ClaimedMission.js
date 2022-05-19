@@ -11,17 +11,22 @@ function ClaimedMission({ mission, unClaim, game }) {
       // onMouseLeave={() => setShowUnclaim(false)}
     >
       <Col xs="12">{mission.desc}</Col>
-      <Col xs="6" >
-      <b className="text-danger"> {mission.vp} VP</b> 
+      <Col xs="6">
+        <b className="text-danger"> {mission.vp} VP</b>
       </Col>
       <Col xs="6">
         {showUnclaim && (
-          <p className={` pointer unclaim text-end m-0`} onClick={() => unClaim(mission)}>
+          <p
+            className={` pointer unclaim text-end m-0`}
+            onClick={() => unClaim(mission)}
+          >
             Unclaim
           </p>
         )}
       </Col>
-        <Col xs='12'><u className=''>Claimed in Round {mission.round}</u></Col>
+      <Col xs="12">
+        <u className="">Claimed in Round {mission.round}</u>
+      </Col>
     </Row>
   );
 }

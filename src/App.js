@@ -264,7 +264,7 @@ function App() {
           </Row>
           {showThree && (<Row >
           <Col
-              className={`${game}-text-gradient d-flex justify-content-center align-items-end`}
+              className={` d-flex justify-content-center align-items-end`}
               xs="12"
               lg="6"
             >
@@ -288,7 +288,7 @@ function App() {
               </span>
             </Col>
             <Col
-              className={`${game}-text-gradient d-flex justify-content-center align-items-end`}
+              className={` d-flex justify-content-center align-items-end`}
               xs="12"
               lg='6'
             >

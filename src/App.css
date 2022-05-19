@@ -106,7 +106,7 @@
 .gdf-vp-button {
   font-weight: 900;
   font-size: 40pt;
-  color: white;
+  color: rgb(0, 255, 191);
 }
 .aof-round-button {
   font-weight: 900;
@@ -116,7 +116,7 @@
 .gdf-round-button {
   font-weight: 900;
   font-size: 30pt;
-  color: white;
+  color: rgb(255, 0, 200);
 }
 
 .gdf-card {
