@@ -9,6 +9,8 @@ import Cards from "./components/Cards";
 import { aofCards, gdfCards } from "./Cards";
 import ClaimedMission from "./components/ClaimedMission";
 import Swal from "sweetalert2";
+import Rules from "./components/Rules";
+
 // let discards = [0];
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
   const [discards, setDiscards] = useState([0]);
   const [round, setRound] = useState(1);
   const [objHint, setShowObjHint] = useState(false);
+  const [showRules, setShowRules] = useState(false);
+
   // const [discards, setDiscards] = useState([0]);
   const [vp, setVP] = useState(0);
   useEffect(() => {
@@ -181,8 +185,7 @@ function App() {
                 onChange={(e) => {
                   setGame(e.target.value);
                 }}
-                className='pointer'
-
+                className="pointer"
               >
                 {games.map((g) => {
                   return (
@@ -193,20 +196,22 @@ function App() {
                 })}
               </Form.Select>
             </Col>{" "}
-            <Col xs="12" md="6" lg="3" xl="3" className="mt-2 "  onMouseEnter={() => setShowObjHint(true)}
-                onMouseLeave={() => setShowObjHint(false)}>
-              <span
-               
-              >
-                Objective Markers:
-              </span>{" "}
-           
+            <Col
+              xs="12"
+              md="6"
+              lg="3"
+              xl="3"
+              className="mt-2 "
+              onMouseEnter={() => setShowObjHint(true)}
+              onMouseLeave={() => setShowObjHint(false)}
+            >
+              <span>Objective Markers:</span>{" "}
               <Form.Select
                 value={objectiveMarkers}
                 onChange={(e) => {
                   setObjectiveMarkers(e.target.value);
                 }}
-                className='pointer'
+                className="pointer"
               >
                 <option value={1}>1</option>
                 <option value={2}>2</option>
@@ -215,15 +220,15 @@ function App() {
                 <option value={5}>5</option>
                 <option value={6}>6</option>
               </Form.Select>
-              
             </Col>
             <Col>
-            {objHint && (
+              {objHint && (
                 <span>
                   Select how many objective markers you are using to filter out
                   unnecessary cards. <b>Changing this will start a new game.</b>
                 </span>
-              )}</Col>
+              )}
+            </Col>
           </Row>
           <hr />
           <Row className="">
@@ -231,19 +236,6 @@ function App() {
               <Button
                 className={`m-2 ${game}-button`}
                 onClick={() => {
-                  // if (threeCards.length > 0) {
-                  //   Swal.fire({
-                  //     icon: "warning",
-                  //     title: "Warning",
-                  //     text: "You will lose your current game if you continue",
-                  //     showCancelButton: true,
-                  //   }).then((res) => {
-                  //     if (res.isConfirmed) {
-                  //       setShowThree(false);
-                  //       setShowAllCards(!showAllCards);
-                  //     }
-                  //   });
-                  // }
                   setShowThree(false);
                   setShowAllCards(!showAllCards);
                 }}
@@ -260,58 +252,76 @@ function App() {
                 {/* Draw Three */}
               </Button>
             </Col>
-          
+            <Col className=" d-flex justify-content-end align-items-end">
+              <u
+                onClick={() => setShowRules(!showRules)}
+                className="pointer hover-blue"
+              >
+                {" "}
+                {showRules ? "Hide " : "See "} suggested rules.
+              </u>
+            </Col>
           </Row>
-          {showThree && (<Row >
-          <Col
-              className={` d-flex justify-content-center align-items-end`}
-              xs="12"
-              lg="6"
+          {showRules && <Rules game={game} setShowRules={setShowRules} />}
+          {showThree && (
+            <Row
+              className={`
+          sticky ${game}-trackers`}
             >
-              <b
-                id={game + "-vp-button-add"}
-                className={` ${game}-round-button vp-button   mx-3 pointer`}
-                onClick={() => changeRound(1)}
+              <Col
+                className={` d-flex justify-content-center align-items-end `}
+                xs="12"
+                lg="6"
               >
-                +
-              </b>
-              <b className={`${game}-round-button`}>Round {round}</b>
-              <b
-                id={game + "-vp-button-subtract"}
-                className={` ${game}-round-button  vp-button mx-3 pointer`}
-                onClick={() => changeRound(-1)}
+                <b
+                  id={game + "-vp-button-subtract"}
+                  className={` ${game}-round-button  vp-button mx-3 pointer`}
+                  onClick={() => changeRound(-1)}
+                >
+                  -
+                </b>
+                <b className={`${game}-round-button`}>Round {round}</b>
+                <b
+                  id={game + "-vp-button-add"}
+                  className={` ${game}-round-button vp-button   mx-3 pointer`}
+                  onClick={() => changeRound(1)}
+                >
+                  +
+                </b>
+                <span
+                  onClick={() => setRound(1)}
+                  className="pointer hover-red "
+                >
+                  Reset
+                </span>
+              </Col>
+              <Col
+                className={` d-flex justify-content-center align-items-end`}
+                xs="12"
+                lg="6"
               >
-                -
-              </b>
-              <span onClick={() => setRound(1)} className="pointer hover-red ">
-                Reset
-              </span>
-            </Col>
-            <Col
-              className={` d-flex justify-content-center align-items-end`}
-              xs="12"
-              lg='6'
-            >
-              <b
-                id={game + "-vp-button-add"}
-                className={` ${game}-vp-button vp-button   mx-3 pointer`}
-                onClick={() => changeVP(1)}
-              >
-                +
-              </b>
-              <b className={`${game}-vp-button`}>{vp} VP</b>
-              <b
-                id={game + "-vp-button-subtract"}
-                className={` ${game}-vp-button  vp-button mx-3 pointer`}
-                onClick={() => changeVP(-1)}
-              >
-                -
-              </b>
-              <span onClick={() => setVP(0)} className="pointer hover-red">
-                Reset
-              </span>
-            </Col>
-          </Row> )}
+                <b
+                  id={game + "-vp-button-subtract"}
+                  className={` ${game}-vp-button  vp-button mx-3 pointer`}
+                  onClick={() => changeVP(-1)}
+                >
+                  -
+                </b>
+                <b className={`${game}-vp-button`}>{vp} VP</b>
+                <b
+                  id={game + "-vp-button-add"}
+                  className={` ${game}-vp-button vp-button   mx-3 pointer`}
+                  onClick={() => changeVP(1)}
+                >
+                  +
+                </b>
+
+                <span onClick={() => setVP(0)} className="pointer hover-red">
+                  Reset
+                </span>
+              </Col>
+            </Row>
+          )}
           <Row>
             <Col>
               {discards.length > 1 &&
@@ -348,7 +358,6 @@ function App() {
                     claimedMissions.map((cm, i) => {
                       return (
                         <ClaimedMission
-
                           key={cm.desc + i}
                           mission={cm}
                           unClaim={unClaim}
@@ -379,7 +388,7 @@ function App() {
             </a>
             .{" "}
           </h6>
-          <h6 className='m-0'>
+          <h6 className="m-0">
             <span>
               If you like 3D printing, check out my other site{" "}
               <a

@@ -2,23 +2,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700;800;900&family=Orbitron:wght@400;900&display=swap");
 
 .app {
+  position: relative;
   /* background-color: rgb(220, 235, 245); */
   min-height: 100vh;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
-   -khtml-user-select: none; /* Konqueror HTML */
-     -moz-user-select: none; /* Old versions of Firefox */
-      -ms-user-select: none; /* Internet Explorer/Edge */
-          user-select: none; /* Non-prefixed version, currently
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
                                 supported by Chrome, Edge, Opera and Firefox */
 }
 
 .aof-background {
   /* background-color: rgb(34, 75, 1); */
   background: rgb(198, 241, 255);
-  background: linear-gradient(180deg,
+  background: linear-gradient(
+    180deg,
     rgba(198, 241, 255, 1) 4%,
-    rgb(237, 254, 255)60%,
+    rgb(237, 254, 255) 60%,
     rgb(83, 126, 26) 100%
   );
   font-family: "Cinzel Decorative", cursive;
@@ -45,7 +47,6 @@
   background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
   background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
   font-size: 1.1em;
-
 }
 .mission-card {
   min-height: 400px;
@@ -65,7 +66,6 @@
   color: purple;
   font-size: x-large;
 }
-
 
 .hover-blue:hover {
   color: blue;
@@ -100,12 +100,12 @@
 
 .aof-vp-button {
   font-weight: 900;
-  font-size: 40pt;
+  font-size: 35pt;
   color: rgb(0, 0, 0);
 }
 .gdf-vp-button {
   font-weight: 900;
-  font-size: 40pt;
+  font-size: 35pt;
   color: rgb(0, 255, 191);
 }
 .aof-round-button {
@@ -156,7 +156,6 @@
 .gdf-claim:hover {
   color: white;
   cursor: pointer;
-
 }
 .aof-claim:hover {
   color: rgb(25, 0, 255);
@@ -205,9 +204,33 @@ main {
   min-height: 90vh;
 }
 .unclaim {
-   color: red;
-   text-decoration: underline;
+  color: red;
+  text-decoration: underline;
 }
 .unclaim:hover {
   color: blue;
+}
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  /* background-color: black; */
+}
+.rules {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.italicized {
+  font-style: italic;
+}
+@media only screen and (max-width: 600px) {
+  .mission-card {
+    min-height: 200px;
+    /* height: 200px; */
+  }
+  .gdf-trackers {
+    background-color: #111314;
+  }
+  .aof-trackers {
+    background-color: #d7f7ff;
+  }
 }
